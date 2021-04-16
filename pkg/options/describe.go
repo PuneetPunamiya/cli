@@ -40,6 +40,7 @@ type DescribeOptions struct {
 	TaskrunName               string
 	Tasks                     []string
 	TriggerBindingName        string
+	TriggerTemplateName       string
 	Limit                     int
 	AskOpts                   survey.AskOpt
 	Fzf                       bool
@@ -100,6 +101,8 @@ func (opts *DescribeOptions) Ask(resource string, options []string) error {
 		opts.ClusterTriggerBindingName = ans
 	case ResourceNameTriggerBinding:
 		opts.TriggerBindingName = ans
+	case ResourceNameTriggerTemplate:
+		opts.TriggerTemplateName = ans
 	}
 
 	return nil
@@ -160,6 +163,8 @@ func (opts *DescribeOptions) FuzzyAsk(resource string, options []string) error {
 		opts.ClusterTriggerBindingName = ans
 	case ResourceNameTriggerBinding:
 		opts.TriggerBindingName = ans
+	case ResourceNameTriggerTemplate:
+		opts.TriggerTemplateName = ans
 	}
 
 	return nil

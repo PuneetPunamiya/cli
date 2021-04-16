@@ -9,4 +9,5 @@ const (
 	ResourceNameClusterTask           = "clustertask"
 	ResourceNameClusterTriggerBinding = "clustertriggerbinding"
 	ResourceNameTriggerBinding        = "triggerbinding"
+	ResourceNameTriggerTemplate       = "triggertemplate"
 )
