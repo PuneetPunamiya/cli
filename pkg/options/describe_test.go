@@ -100,6 +100,12 @@ func TestDescribeOptions_Ask(t *testing.T) {
 		"clustertask3",
 	}
 
+	options9 := []string{
+		"triggerbinding1",
+		"triggerbinding2",
+		"triggerbinding3",
+	}
+
 	options10 := []string{
 		"clustertriggerbinding1",
 		"clustertriggerbinding2",
@@ -137,6 +143,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "",
 				ClusterTaskName:           "",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
 			},
 		},
 		{
@@ -163,6 +170,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "",
 				ClusterTaskName:           "",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
 			},
 		},
 		{
@@ -189,6 +197,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "",
 				ClusterTaskName:           "",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
 			},
 		},
 		{
@@ -215,6 +224,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "",
 				ClusterTaskName:           "",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
 			},
 		},
 		{
@@ -241,6 +251,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "",
 				ClusterTaskName:           "",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
 			},
 		},
 		{
@@ -267,6 +278,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "",
 				ClusterTaskName:           "",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
 			},
 		},
 		{
@@ -293,6 +305,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "",
 				ClusterTaskName:           "",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
 			},
 		},
 		{
@@ -319,6 +332,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "",
 				ClusterTaskName:           "",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
 			},
 		},
 		{
@@ -345,6 +359,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "pipeline-resource1",
 				ClusterTaskName:           "",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
 			},
 		},
 		{
@@ -371,6 +386,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "pipeline-resource3",
 				ClusterTaskName:           "",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
 			},
 		},
 		{
@@ -397,6 +413,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "",
 				ClusterTaskName:           "clustertask1",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
 			},
 		},
 		{
@@ -423,6 +440,34 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "",
 				ClusterTaskName:           "clustertask3",
 				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "",
+			},
+		},
+		{
+			name:     "select triggerbinding name option 3",
+			resource: ResourceNameTriggerBinding,
+			prompt: prompt.Prompt{
+				CmdArgs: []string{},
+				Procedure: func(c *goexpect.Console) error {
+					if _, err := c.ExpectString("Select triggerbinding:"); err != nil {
+						return err
+					}
+					if _, err := c.SendLine(options9[2]); err != nil {
+						return err
+					}
+					return nil
+				},
+			},
+			options: options10,
+			want: DescribeOptions{
+				PipelineName:              "",
+				PipelineRunName:           "",
+				TaskName:                  "",
+				TaskrunName:               "",
+				PipelineResourceName:      "",
+				ClusterTaskName:           "",
+				ClusterTriggerBindingName: "",
+				TriggerBindingName:        "triggerbinding3",
 			},
 		},
 		{
@@ -449,6 +494,7 @@ func TestDescribeOptions_Ask(t *testing.T) {
 				PipelineResourceName:      "",
 				ClusterTaskName:           "",
 				ClusterTriggerBindingName: "clustertriggerbinding3",
+				TriggerBindingName:        "",
 			},
 		},
 	}
@@ -471,6 +517,9 @@ func TestDescribeOptions_Ask(t *testing.T) {
 			}
 			if opts.TaskrunName != tp.want.TaskrunName {
 				t.Errorf("Unexpected TaskRun Name")
+			}
+			if opts.TriggerBindingName != tp.want.TriggerBindingName {
+				t.Errorf("Unexpected TriggerBinding Name")
 			}
 			if opts.ClusterTriggerBindingName != tp.want.ClusterTriggerBindingName {
 				t.Errorf("Unexpected ClusterTriggerBinding Name")
