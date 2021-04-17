@@ -7,4 +7,5 @@ const (
 	ResourceNameTask             = "task"
 	ResourceNameTaskRun          = "taskrun"
 	ResourceNameClusterTask      = "clustertask"
+	ResourceNameTriggerBinding   = "triggerbinding"
 )
