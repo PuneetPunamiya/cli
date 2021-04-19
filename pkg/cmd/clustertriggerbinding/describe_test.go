@@ -134,3 +134,21 @@ func TestClusterTriggerBindingDescribe_WithMultipleParams(t *testing.T) {
 	}
 	golden.Assert(t, out, fmt.Sprintf("%s.golden", t.Name()))
 }
+
+func TestClusterTriggerBindingDescribe_AutoSelect(t *testing.T) {
+	ctbs := []*v1alpha1.ClusterTriggerBinding{
+		ctb.ClusterTriggerBinding("ctb1",
+			ctb.ClusterTriggerBindingSpec(
+				ctb.TriggerBindingParam("key", "value"))),
+	}
+
+	cs := test.SeedTestResources(t, triggertest.Resources{ClusterTriggerBindings: ctbs})
+	p := &test.Params{Triggers: cs.Triggers, Kube: cs.Kube}
+
+	TriggerBinding := Command(p)
+	out, err := test.ExecuteCommand(TriggerBinding, "desc", "-n", "ns")
+	if err != nil {
+		t.Errorf("Error expected here")
+	}
+	golden.Assert(t, out, fmt.Sprintf("%s.golden", t.Name()))
+}
