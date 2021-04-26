@@ -6,8 +6,8 @@ EventListenerTriggers
 
  BINDINGS
 
-  REF   KIND             APIVERSION
-  tb1   TriggerBinding   
+  REF   KIND   APIVERSION
+  tb1          
 
  TEMPLATE REF   APIVERSION
  tt1            v1alpha1
