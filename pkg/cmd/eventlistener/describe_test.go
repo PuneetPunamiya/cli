@@ -25,7 +25,9 @@ import (
 	"gotest.tools/v3/golden"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"knative.dev/pkg/apis"
 	duckv1alpha1 "knative.dev/pkg/apis/duck/v1alpha1"
+	"knative.dev/pkg/apis/duck/v1beta1"
 )
 
 func TestEventListenerDescribe_InvalidNamespace(t *testing.T) {
@@ -144,7 +146,12 @@ func TestEventListenerDescribe_WithOutputStatusURLAndName(t *testing.T) {
 			Status: v1alpha1.EventListenerStatus{
 				AddressStatus: duckv1alpha1.AddressStatus{
 					Address: &duckv1alpha1.Addressable{
-						Hostname: getURL("el-listener.default.svc.cluster.local"),
+						Addressable: v1beta1.Addressable{
+							URL: &apis.URL{
+								Scheme: "http",
+								Host:   "el-listener.default.svc.cluster.local",
+							},
+						},
 					},
 				},
 				Configuration: v1alpha1.EventListenerConfig{
