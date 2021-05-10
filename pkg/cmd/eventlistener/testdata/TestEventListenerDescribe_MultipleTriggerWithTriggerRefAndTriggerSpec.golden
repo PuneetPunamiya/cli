@@ -3,11 +3,6 @@ Namespace:   ns
 
 EventListenerTriggers
 
- TRIGGER REF
- test-ref
- 
-EventListenerTriggers
-
  NAME
  foo-trig
 
@@ -20,6 +15,9 @@ EventListenerTriggers
 
  TEMPLATE REF   APIVERSION
  tt1            v1alpha1
+ 
+ TRIGGER REF
+ test-ref
  
  INTERCEPTORS
 - ref: {}

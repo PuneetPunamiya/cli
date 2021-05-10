@@ -712,24 +712,6 @@ func TestEventListenerDescribe_WithCELInterceptors(t *testing.T) {
 }
 
 func TestEventListenerDescribe_WithMultipleBindingAndInterceptors(t *testing.T) {
-	// els := []*v1alpha1.EventListener{
-	// 	el.EventListener("el1", "ns",
-	// 		el.EventListenerSpec(
-	// 			el.EventListenerTrigger("tt1", "v1alpha1",
-	// 				el.EventListenerTriggerBinding("tb1", "", ""),
-	// 				el.EventListenerTriggerBinding("tb2", "ClusterTriggerBinding", "v1alpha1"),
-	// 				el.EventListenerTriggerBinding("", "", "v1alpha1"),
-	// 				el.EventListenerTriggerName("foo-trig"),
-	// 				el.EventListenerCELInterceptor("body.value == 'test'", el.EventListenerCELOverlay("value", "'testing'"))),
-	// 			el.EventListenerTrigger("tt2", "v1alpha1",
-	// 				el.EventListenerTriggerBinding("tb4", "", ""),
-	// 				el.EventListenerTriggerBinding("tb5", "ClusterTriggerBinding", "v1alpha1"),
-	// 				el.EventListenerTriggerServiceAccount("sa1", "ns1"),
-	// 				el.EventListenerTriggerName("foo-trig"),
-	// 				el.EventListenerTriggerInterceptor("webhookTest", "v1", "Service", "namespace"),
-	// 				el.EventListenerCELInterceptor("body.value == 'test'", el.EventListenerCELOverlay("value", "'testing'"))))),
-	// }
-
 	triggerTemplateRef1 := "tt1"
 	triggerTemplateRef2 := "tt2"
 	els := []*v1alpha1.EventListener{
@@ -807,6 +789,8 @@ func TestEventListenerDescribe_WithMultipleBindingAndInterceptors(t *testing.T) 
 										APIVersion: "v1",
 									},
 								},
+							},
+							{
 								DeprecatedCEL: &v1alpha1.CELInterceptor{
 									Filter: "body.value == 'test'",
 									Overlays: []v1alpha1.CELOverlay{
